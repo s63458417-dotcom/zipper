@@ -6,41 +6,56 @@ import { motion } from 'framer-motion';
 import { useSecurity } from './hooks/useSecurity';
 
 // --- Aurora Background Component ---
+// Optimized: Replaced CSS filter: blur() with radial-gradients for better performance on low-end devices.
 const AuroraBackground = () => {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden bg-black pointer-events-none">
       {/* Noise Texture */}
       <div className="bg-noise absolute inset-0 z-20" />
       
-      {/* Aurora Blobs */}
+      {/* Aurora Blob 1 (Purple) */}
       <motion.div 
         animate={{ 
-          x: [-100, 100, -100], 
-          y: [-50, 50, -50], 
-          scale: [1, 1.2, 1],
+          x: [-50, 50, -50], 
+          y: [-20, 20, -20], 
+          scale: [1, 1.1, 1],
           opacity: [0.3, 0.5, 0.3]
         }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] bg-purple-900 rounded-full mix-blend-screen filter blur-[100px] opacity-30"
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }} // Linear ease is cheaper
+        style={{
+          background: 'radial-gradient(circle, rgba(88,28,135,0.4) 0%, rgba(0,0,0,0) 70%)',
+          willChange: 'transform, opacity'
+        }}
+        className="absolute -top-[10%] -left-[10%] w-[80vw] h-[80vw] rounded-full mix-blend-screen opacity-30"
       />
       
+      {/* Aurora Blob 2 (Cyan) */}
       <motion.div 
         animate={{ 
-          x: [100, -100, 100], 
-          y: [50, -50, 50],
-          scale: [1.2, 1, 1.2],
+          x: [50, -50, 50], 
+          y: [20, -20, 20],
+          scale: [1.1, 1, 1.1],
         }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] bg-cyan-900 rounded-full mix-blend-screen filter blur-[120px] opacity-30"
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        style={{
+          background: 'radial-gradient(circle, rgba(8,145,178,0.3) 0%, rgba(0,0,0,0) 70%)',
+          willChange: 'transform'
+        }}
+        className="absolute top-[10%] -right-[10%] w-[70vw] h-[70vw] rounded-full mix-blend-screen opacity-30"
       />
 
+      {/* Aurora Blob 3 (Blue) */}
       <motion.div 
         animate={{ 
-           scale: [1, 1.5, 1],
+           scale: [1, 1.2, 1],
            opacity: [0.2, 0.4, 0.2]
         }}
-        transition={{ duration: 15, repeat: Infinity }}
-        className="absolute bottom-[-10%] left-[20%] w-[50vw] h-[50vw] bg-blue-800 rounded-full mix-blend-screen filter blur-[100px] opacity-20"
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        style={{
+          background: 'radial-gradient(circle, rgba(30,58,138,0.3) 0%, rgba(0,0,0,0) 70%)',
+          willChange: 'transform, opacity'
+        }}
+        className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] rounded-full mix-blend-screen opacity-20"
       />
     </div>
   );
