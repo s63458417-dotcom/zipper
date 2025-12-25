@@ -1,0 +1,5 @@
+{
+  "name": "ZipStream",
+  "description": "A client-side folder compressor that lets you zip and download local directories instantly without server uploads.",
+  "requestFramePermissions": []
+}
